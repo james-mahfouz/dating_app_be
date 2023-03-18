@@ -26,5 +26,6 @@ Route::group(["prefix"=>"v0.0.1"], function(){
         Route::get('/login', [AuthController::class, "login"]);
         Route::post('/register', [AuthController::class, "register"]);
         Route::get('/logout', [AuthController::class, "logout"]);
+        Route::get('/verify', [AuthController::class, "verifyToken"]);
     });
 });

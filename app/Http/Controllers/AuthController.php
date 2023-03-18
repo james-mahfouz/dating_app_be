@@ -52,7 +52,7 @@ class AuthController extends Controller
             'age' => 'required|integer|between:18,64',
         ]);
         $gender = $request->gender == 'Male' ? 1 : 2;
-        
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -94,4 +94,12 @@ class AuthController extends Controller
             ]
         ]);
     }
+    public function verifyToken()
+    {
+        return response()->json([
+            'status' => 'success',
+            'user' => Auth::user(),
+        ]);
+    }
+
 }
