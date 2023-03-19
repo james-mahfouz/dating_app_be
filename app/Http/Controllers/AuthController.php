@@ -94,12 +94,12 @@ class AuthController extends Controller
             ]
         ]);
     }
-    public function verifyToken()
-    {
-        return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
-        ]);
-    }
 
+    public function change_infos(Request $request){
+        request->validate([
+            'name' => 'required|string|max:255',
+            'country' => 'required|string|max:100',
+
+        ])
+    }
 }
