@@ -99,7 +99,18 @@ class AuthController extends Controller
         request->validate([
             'name' => 'required|string|max:255',
             'country' => 'required|string|max:100',
+            'description' => 'required|string|max:255',
+        ]);
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->country = $request->input('country');
+        $user->description = $request->input('description');
+        $user->save();
 
-        ])
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Name updated successfully',
+            'user' => $user,
+        ]);
     }
 }
