@@ -96,7 +96,7 @@ class AuthController extends Controller
     }
 
     public function change_infos(Request $request){
-        request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'country' => 'required|string|max:100',
             'description' => 'required|string|max:255',
