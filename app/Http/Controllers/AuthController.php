@@ -125,7 +125,7 @@ class AuthController extends Controller
         return response()->json($users);
     }
 
-    public function uploadProfilePicture(Request $request)
+    public function upload_picture(Request $request)
 {
         $user = $request->user();
         $file = $request->file('profile_picture');
