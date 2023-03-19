@@ -129,14 +129,24 @@ class AuthController extends Controller
     }
 
     public function upload_picture(Request $request)
-{
+    {
         $user = $request->user();
+        $previous_picture = $user->pictures()->first();
+        
+        if ($previous_picture!=null) {
+            echo "hello";
+            Storage::disk('public')->delete($previous_picture->path);
+            echo "im in the middle";
+            $previous_picture->delete();
+            echo "I am quitin";
+        }
+
         $file = $request->file('profile_picture');
         $path = $file->store('profile-pictures', 'public');
 
         $picture = new Picture();
         $picture->path = $path;
-        $picture->users_id = $user->id;
+        $picture->user_id = $user->id;
         $picture->save();
 
         return response()->json(['message' => 'Profile picture uploaded successfully.']);
