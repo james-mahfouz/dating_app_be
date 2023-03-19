@@ -118,9 +118,9 @@ class AuthController extends Controller
     {
         $gender = $request->input('gender');
 
-        $oppositeGender = ($gender == 'male') ? 'female' : 'male';
+        $oppositeGender = ($gender == 1) ? 2 : 1;
 
-        $users = User::where('gender', $oppositeGender)->get();
+        $users = User::where('genders_id', $oppositeGender)->get();
 
         return response()->json($users);
     }
