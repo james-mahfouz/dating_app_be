@@ -125,4 +125,18 @@ class AuthController extends Controller
         return response()->json($users);
     }
 
+    public function uploadProfilePicture(Request $request)
+{
+        $user = $request->user();
+        $file = $request->file('profile_picture');
+        $path = $file->store('profile-pictures', 'public');
+
+        $picture = new Picture();
+        $picture->path = $path;
+        $picture->users_id = $user->id;
+        $picture->save();
+
+        return response()->json(['message' => 'Profile picture uploaded successfully.']);
+    }
+
 }
