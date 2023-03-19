@@ -113,4 +113,16 @@ class AuthController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function getOppositeGenderUsers(Request $request)
+    {
+        $gender = $request->input('gender');
+
+        $oppositeGender = ($gender == 'male') ? 'female' : 'male';
+
+        $users = User::where('gender', $oppositeGender)->get();
+
+        return response()->json($users);
+    }
+
 }
