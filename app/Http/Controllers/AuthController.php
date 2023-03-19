@@ -114,7 +114,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getOppositeGenderUsers(Request $request)
+    public function get_users(Request $request)
     {
         $gender = $request->input('gender');
 

@@ -28,5 +28,6 @@ Route::group(["prefix"=>"v0.0.1"], function(){
         Route::get('/logout', [AuthController::class, "logout"]);
         Route::post('/verify', [AuthController::class, "verifyToken"]);
         Route::post('/change', [AuthController::class, "change_infos"]);
+        Route::post('/getusers', [AuthController::class, "get_users"]);
     });
 });
