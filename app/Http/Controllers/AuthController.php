@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Picture;
 use App\Models\Block;
+use App\Models\Favorites;
 
 class AuthController extends Controller
 {
@@ -169,4 +170,19 @@ class AuthController extends Controller
         return response()->json(['message' => 'User has been blocked.'], 200);
     }
 
+    public function favorite(User $user)
+    {
+        $currentUser = auth()->user();
+
+        if ($currentUser->favorating()->where('favorated', $user->id)->exists()) {
+            return response()->json(['message' => 'User is already blocked.'], 409);
+        }
+
+        $favorite = new Favorite();
+        $favorite->favorating = $currentUser->id;
+        $favorite->favorated = $user->id;
+        $favorite->save();
+
+        return response()->json(['message' => 'User has been added to favorites.'], 200);
+    }
 }
