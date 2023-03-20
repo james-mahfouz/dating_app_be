@@ -24,6 +24,6 @@ class Block extends Model
     public function blockedUser()
     {
         return $this->belongsTo(User::class, 'blocked');
-}
+    }
 }
 
