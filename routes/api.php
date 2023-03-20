@@ -29,5 +29,6 @@ Route::group(["prefix"=>"v0.0.1"], function(){
         Route::post('/change', [AuthController::class, "change_infos"]);
         Route::post('/getusers', [AuthController::class, "get_users"]);
         Route::post('/upload_picture', [AuthController::class, "upload_picture"]);
+        Route::post('')
     });
 });

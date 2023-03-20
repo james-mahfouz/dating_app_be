@@ -153,6 +153,20 @@ class AuthController extends Controller
         return response()->json(['message' => 'Profile picture uploaded successfully.']);
     }
 
+    public function block(User $user)
+    {
+        $currentUser = auth()->user();
 
+        if ($currentUser->blocking()->where('blocked', $user->id)->exists()) {
+            return response()->json(['message' => 'User is already blocked.'], 409);
+        }
+
+        $block = new Block();
+        $block->blocking = $currentUser->id;
+        $block->blocked = $user->id;
+        $block->save();
+
+        return response()->json(['message' => 'User has been blocked.'], 200);
+    }
 
 }
