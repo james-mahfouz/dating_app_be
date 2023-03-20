@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Picture;
 use App\Models\Block;
-use App\Models\Favorites;
+use App\Models\Favorite;
 
 class AuthController extends Controller
 {
