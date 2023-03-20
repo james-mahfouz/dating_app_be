@@ -70,5 +70,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Picture::class);
     }
+
+    public function blocking()
+    {
+        return $this->hasMany(Block::class, 'blocking');
+    }
+
+    public function blocked()
+    {
+        return $this->hasMany(Block::class, 'blocked');
+    }
     
 }
