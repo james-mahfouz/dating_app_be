@@ -16,12 +16,12 @@ class Favorite extends Model
         'favorated',
     ];
 
-    public function blockingUser()
+    public function favoratingUser()
     {
         return $this->belongsTo(User::class, 'favorating');
     }
 
-    public function blockedUser()
+    public function favoratedUser()
     {
         return $this->belongsTo(User::class, 'favorated');
     }
