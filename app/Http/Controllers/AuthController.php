@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Picture;
+use App\Models\Block;
 
 class AuthController extends Controller
 {
@@ -151,5 +152,7 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Profile picture uploaded successfully.']);
     }
+
+
 
 }
