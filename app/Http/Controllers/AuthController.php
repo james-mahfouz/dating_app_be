@@ -123,9 +123,13 @@ class AuthController extends Controller
     {
         $gender = $request->input('gender');
 
-        $oppositeGender = ($gender == 1) ? 2 : 1;
+        $oppositeGender = ($gender == 1) ? 1 : 2;
 
-        $users = User::where('genders_id', $oppositeGender)->get();
+        $users = User::where('genders_id', $oppositeGender)
+            ->whereDoesntHave('blocked', function ($query) {
+                $query->where('blocking', auth()->user()->id);
+            })
+            ->get();
 
         return response()->json($users);
     }
