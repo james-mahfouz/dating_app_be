@@ -129,7 +129,11 @@ class AuthController extends Controller
 
         $oppositeGender = ($gender == 1) ? 2 : 1;
 
-        $users = User::where('genders_id', $oppositeGender)
+        $users = User::with(['pictures' => function($query) {
+                $query->select(['user_id', 'path'])
+                    ->limit(1);
+            }])
+            ->where('genders_id', $oppositeGender)
             ->whereDoesntHave('blocked', function ($query) {
                 $query->where('blocking', auth()->user()->id);
             })
@@ -156,7 +160,10 @@ class AuthController extends Controller
         $picture->user_id = $user->id;
         $picture->save();
 
-        return response()->json(['message' => 'Profile picture uploaded successfully.']);
+        return response()->json([
+            'message' => 'Profile picture uploaded successfully.',
+            'path' => $path
+        ]);
     }
 
     public function block(User $user)
