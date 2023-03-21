@@ -197,4 +197,24 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'User has been added to favorites.'], 200);
     }
+
+    public function chat(User $user)
+    {
+        $currentUser = auth()->user();
+
+        if ($currentUser->chatting()->where('users_id2', $user->id)->exists()) {
+            return response()->json(['message' => 'Already chatting'], 409);
+        }
+        if ($currentUser->chatted()->where('users_id1', $user->id)->exists()) {
+            return response()->json(['message' => 'Already chatting'], 409);
+        }
+
+        $users_chat = new Users_chat();
+        $users_chat->users_id1 = $currentUser->id;
+        $users_chat->users_id2 = $user->id;
+        $users_chat->save();
+
+        return response()->json(['message' => 'User can chat with the user.'], 200);
+    }
+
 }
