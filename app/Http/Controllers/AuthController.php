@@ -130,8 +130,7 @@ class AuthController extends Controller
         $oppositeGender = ($gender == 1) ? 2 : 1;
 
         $users = User::with(['pictures' => function($query) {
-                $query->select(['user_id', 'path'])
-                    ->limit(1);
+                $query->select(['user_id', 'path']);
             }])
             ->where('genders_id', $oppositeGender)
             ->whereDoesntHave('blocked', function ($query) {
