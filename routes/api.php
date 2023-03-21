@@ -31,7 +31,8 @@ Route::group(["prefix"=>"v0.0.1"], function(){
         Route::post('/upload_picture', [AuthController::class, "upload_picture"]);
         Route::post('block/{user}', [AuthController::class, "block"]);
         Route::post('favorite/{user}', [AuthController::class, "favorite"]);
+        Route::post('chat/{user}', [AuthController::class, "chat"]);
     });
 
-    
+
 });

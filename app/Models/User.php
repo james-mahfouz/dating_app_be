@@ -93,12 +93,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function chatting()
     {
-        return $this->hasMany(Block::class, 'users_id1');
+        return $this->hasMany(Users_chat::class, 'users_id1');
     }
 
     public function chatted()
     {
-        return $this->hasMany(Block::class, 'users_id2');
+        return $this->hasMany(Users_chat::class, 'users_id2');
     }
     
 }

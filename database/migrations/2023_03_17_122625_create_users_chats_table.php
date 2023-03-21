@@ -15,6 +15,7 @@ class CreateUsersChatsTable extends Migration
             $table->id();
             $table->foreignId('users_id1')->constrained('users');
             $table->foreignId('users_id2')->constrained('users');
+            $table->timestamps();
         });
     }
 
