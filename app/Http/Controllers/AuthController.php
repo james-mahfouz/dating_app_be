@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Picture;
 use App\Models\Block;
 use App\Models\Favorite;
+use App\Models\Users_chat;
 
 class AuthController extends Controller
 {

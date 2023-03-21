@@ -21,7 +21,7 @@ class Users_chat extends Model
         return $this->belongsTo(User::class, 'users_id1');
     }
 
-    public function blockedUser()
+    public function chattedUser()
     {
         return $this->belongsTo(User::class, 'users_id2');
     }
