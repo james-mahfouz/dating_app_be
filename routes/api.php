@@ -32,4 +32,6 @@ Route::group(["prefix"=>"v0.0.1"], function(){
         Route::post('block/{user}', [AuthController::class, "block"]);
         Route::post('favorite/{user}', [AuthController::class, "favorite"]);
     });
+
+    
 });

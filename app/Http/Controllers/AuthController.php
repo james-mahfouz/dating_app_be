@@ -36,15 +36,18 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+        $profile_picture = $user->pictures->first;
+        $profile_picture_path = $profile_picture ? $profile_picture->path : null;
+
         return response()->json([
                 'status' => 'success',
                 'user' => $user,
+                'profile_picture_path' => $profile_picture_path,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
                 ]
             ]);
-
     }
 
     public function register(Request $request){
@@ -121,9 +124,10 @@ class AuthController extends Controller
 
     public function get_users(Request $request)
     {
-        $gender = $request->input('gender');
+        $user = auth()->user();
+        $gender = $user->genders_id;
 
-        $oppositeGender = ($gender == 1) ? 1 : 2;
+        $oppositeGender = ($gender == 1) ? 2 : 1;
 
         $users = User::where('genders_id', $oppositeGender)
             ->whereDoesntHave('blocked', function ($query) {
@@ -140,11 +144,8 @@ class AuthController extends Controller
         $previous_picture = $user->pictures()->first();
         
         if ($previous_picture!=null) {
-            echo "hello";
             Storage::disk('public')->delete($previous_picture->path);
-            echo "im in the middle";
             $previous_picture->delete();
-            echo "I am quitin";
         }
 
         $file = $request->file('profile_picture');
